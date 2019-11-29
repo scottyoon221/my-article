@@ -11,10 +11,11 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      article: { type: "", name: "", id: "" },
+      article: { type: "", name: "", id: "", elements: {}},
       hasError: false,
       isLoading: false,
-      errorMessage: ""
+      errorMessage: "",
+      mainImage: ""
     };
     this.handleClick = debounce(this.handleClick, 500);
   }
