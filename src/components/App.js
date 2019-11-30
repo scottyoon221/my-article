@@ -10,8 +10,9 @@ import ReactLoading from "react-loading";
 class App extends Component {
   constructor() {
     super();
+    let article = JSON.parse(localStorage.getItem('article')) || {type: "", name: "", id: "", elements: {}}
     this.state = {
-      article: { type: "", name: "", id: "", elements: {}},
+      article: article,
       hasError: false,
       isLoading: false,
       errorMessage: "",

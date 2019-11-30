@@ -2,7 +2,7 @@ import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import { isEmpty } from "underscore";
 import ArticleContent from "./ArticleContent";
-import extractContent from "../util/utils.js";
+import { extractContent, cacheArticle, clearCache } from "../util/utils.js";
 
 /**
   * This component display article information
@@ -11,7 +11,7 @@ const Article = props => {
   const {name, id, type, elements} = props.article;
   const baseURL = 'https://my12.digitalexperience.ibm.com';
   const divStyle = {
-    "margin-top": "20px"
+    "marginTop": "20px"
   };
   let mainImage, author, body;
   if(!isEmpty(elements)) {
@@ -84,6 +84,33 @@ const Article = props => {
           }
         </div>
       </div>
+      {
+        author !== undefined ?
+          <Fragment>
+            <div className="row" style={divStyle}>
+              <div className="col-3">
+                <b>Cache Article:</b>
+              </div>
+              <div className="col-9">
+                <button type="button" className="btn btn-primary" onClick={() => {cacheArticle(props.article)}}>
+                  Cache Article
+                </button>
+              </div>
+            </div>
+            <div className="row" style={divStyle}>
+              <div className="col-3">
+                <b>Clear Cache:</b>
+              </div>
+              <div className="col-9">
+                <button type="button" className="btn btn-primary" onClick={clearCache}>
+                  Clear Cache
+                </button>
+              </div>
+            </div>
+          </Fragment>
+          :
+          null
+      }
     </Fragment>
   );
 }
